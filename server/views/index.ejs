@@ -1,0 +1,27 @@
+<%- include partials/header.ejs %> <%- include partials/main_nav.ejs %>
+
+<!-- Main Content -->
+<div class="px-4 py-5 my-5 text-center text-white">
+
+    <img src="/assets/images/bracket16 opacity1.png" class="d-block mx-auto mb-4"  alt="" width="690" height="280">
+    <!--<div style="width: 1000px; margin-left: auto; margin-right: auto;background-color:black; opacity:0.9; padding: 10px; border-radius: 15px">-->
+    <h2 class="display-5 fw-bold">Tournament Management</h2>
+    <div class="col-lg-6 mx-auto">
+      <p class="lead mb-4 white"><b>Join millions of gamers and game organizers. Create your tounament bracket system with just a simple click</b></p>
+
+   
+      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+        <button type="button" class="btn btn-dark btn-lg px-4 gap-3 text-white">
+          <a href="/bracket-list/createPage/" style="text-decoration:none; color:white">
+          Create Tournament
+        </button>&nbsp;
+        <button type="button" class="btn btn-dark btn-lg px-4 text-white">
+        <a href="/bracket-list/" style="text-decoration:none; color:white">
+          Browse Brackets</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<%- include partials/bottom_nav.ejs %> <%- include partials/footer.ejs %>

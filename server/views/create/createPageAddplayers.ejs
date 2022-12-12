@@ -1,0 +1,37 @@
+<% include ../partials/header.ejs %>
+<% include ../partials/main_nav.ejs %>
+
+<div class="container">
+    <div class="row">
+      <div class="col-md-offset-1 col-md-10">
+        <h3>Create Tournament</h3>
+        <form class="form" method="POST">
+
+<% for (let count =0; count < 8; count++) { %> 
+<!--the 8 here can be replaced with a variable from the url but 
+I want to wait for more of the site to work out this part-->
+            <div class="form-group">
+                <label for="tNameTextField">Enter Name<%=count+1%></label>
+                <input type="text" class="form-control"
+                id="nameTextField"
+                placeholder="Enter Name"
+                name="Name<%=count%>" required>
+            </div>
+	<% } %>
+		
+	    
+            <button class="btn btn-primary" type="submit">
+                <i class="fas fa-edit"></i> Submit</button>
+                <!--submit button for the form above, 
+                return to /home page using the cancel button may need to cancel previous form?-->
+                <a href="/home" class="btn btn-warning">
+                    <i class="fas fa-undo"></i> Cancel</a>
+
+        </form>
+    </div>
+
+</div>
+</div>
+
+<% include ../partials/bottom_nav.ejs %>
+<% include ../partials/footer.ejs %>

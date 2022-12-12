@@ -1,0 +1,242 @@
+1. copy Week-5 program part1
+2. Client side pages are in --> public folder 
+public--> Scripts->app.js
+
+(function () {
+  function Start() {
+    console.log("App Started...");
+    let deletebuttons = document.querySelectorAll(".btn-danger"); //syntax identical to jquery
+    for (button of deletebuttons) {
+      button.addEventListener("click", (event) => {
+        if (!confirm("Are you sure")) {
+          event.preventDefault();
+          window.location.assign("/book-list");
+        }
+      });
+    }
+  }
+  window.addEventListener("load", Start);
+})();
+
+If you have index.html file ypu can keep in public folder.
+SCripts/app.js we connecting views-partials-footer.ejs
+so this script is activated when window finish loading
+
+Restructuring is required for the authentication
+1. Create folder controllers in server and create two file book.js and index.js
+2. add following code into controllers->index.js
+let express = require("express");
+let router = express.Router();
+
+module.exports.displayHomepage = (req, res, next) => {
+  res.render("index", { title: "Home" });
+};
+
+3. goto routes->index.js
+now to connect routes--> index.js with controllers--> index.js
+add following refernce in routes-->index.js
+
+let indexController = require("../controllers/index");
+
+4. now call displayhomepage function from controllers/index.js
+add routes/index.js
+router.get("/", indexController.displayHomepage);
+
+5. Now add following code in the controllers/index.js
+let express = require("express");
+let router = express.Router();
+
+
+module.exports.displayHomepage = (req, res, next) => {
+  res.render("index", { title: "Home" });
+};
+
+module.exports.displayaboutpage = (req, res, next) => {
+  res.render("index", { title: "About" });
+};
+
+module.exports.displayproductpage = (req, res, next) => {
+  res.render("index", { title: "Products" });
+};
+
+module.exports.displayservicespage = (req, res, next) => {
+  res.render("index", { title: "Services" });
+};
+
+module.exports.displayContactpage = (req, res, next) => {
+  res.render("index", { title: "Contact" });
+};
+
+6. now
+in routes/index.js
+/* GET home page. */
+router.get("/home", indexController.displayHomepage);
+
+/* GET About Us page. */
+router.get("/about", indexController.displayaboutpage);
+
+/* GET Products page. */
+router.get("/products", indexController.displayproductpage);
+
+/* GET Services page. */
+router.get("/services", indexController.displayservicespage);
+
+/* GET Contact Us page. */
+router.get("/contact", indexController.displayContactpage);
+
+7. Same thing apply to book.js as well
+controllers/book.js
+let express = require("express");
+let router = express.Router();
+let mongoose = require("mongoose");
+
+//create reference to the model (dbschema )
+let Book = require("../models/book");
+
+now declare displayBookList and copy code from routes-->book.js file to here in controllers->book.js
+
+module.exports.displayBookList = (req, res, next) => {
+  Book.find((err, bookList) => {
+    if (err) {
+      return console.error(err);
+    } else {
+      //console.log(bookList);
+
+      res.render("book/list", { title: "Books", BookList: bookList });
+      //render book.ejs and pass title and Booklist variable we are passing bookList object to BookList property
+    }
+  });
+};
+
+8.now make reference to the bookcontroller
+so add following line in routes/book.js
+
+let bookController = require("../controllers/book");
+
+/* GET Route for the Book List page - READ OPeration */
+router.get("/", bookController.displayBookList);
+
+9. Now the updated code in routes/books.js
+let express = require("express");
+let router = express.Router();
+let mongoose = require("mongoose");
+
+// connect to our Book Model
+let Book = require("../models/book");
+
+let bookController = require("../controllers/book");
+
+/* GET Route for the Book List page - READ OPeration */
+router.get("/", bookController.displayBookList);
+
+/* GET Route for displaying Add page - Create OPeration */
+router.get("/add", bookController.addpage);
+
+/* POST Route for processing Add page - Create OPeration */
+router.post("/add", bookController.addprocesspage);
+
+/* GET Route for displaying Edit page -UPDATE OPeration */
+router.get("/edit/:id", bookController.displayeditpage);
+
+/*POST Route for processing Edit page - UPDATE OPeration */
+router.post("/edit/:id", bookController.processingeditpage);
+
+/* GET to perform book deletion -Delete OPeration */
+router.get("/delete/:id", bookController.deletepage);
+module.exports = router;
+
+
+10. update code in controllers/books.js
+let express = require("express");
+let router = express.Router();
+let mongoose = require("mongoose");
+
+//create reference to the model (dbschema )
+let Book = require("../models/book");
+
+module.exports.displayBookList = (req, res, next) => {
+  Book.find((err, bookList) => {
+    if (err) {
+      return console.error(err);
+    } else {
+      //console.log(bookList);
+
+      res.render("book/list", { title: "Books", BookList: bookList });
+      //render book.ejs and pass title and Booklist variable we are passing bookList object to BookList property
+    }
+  });
+};
+
+module.exports.addpage = (req, res, next) => {
+  res.render("book/add", { title: "Add Book" });
+};
+
+module.exports.addprocesspage = (req, res, next) => {
+  let newbook = Book({
+    name: req.body.name,
+    author: req.body.author,
+    published: req.body.published,
+    description: req.body.description,
+    price: req.body.price,
+  });
+  Book.create(newbook, (err, Book) => {
+    if (err) {
+      console.log(err);
+      res.end(err);
+    } else {
+      //refresh the book-list
+      res.redirect("/book-list");
+    }
+  });
+};
+
+module.exports.displayeditpage = (req, res, next) => {
+  let id = req.params.id; //id of actual object
+
+  Book.findById(id, (err, booktoedit) => {
+    if (err) {
+      console.log(err);
+      res.end(err);
+    } else {
+      //show the edit view
+      res.render("book/edit", { title: "Edit Book", book: booktoedit });
+    }
+  });
+};
+
+module.exports.processingeditpage = (req, res, next) => {
+  let id = req.params.id; //id of actual object
+
+  let updatebook = Book({
+    _id: id,
+    name: req.body.name,
+    author: req.body.author,
+    published: req.body.published,
+    description: req.body.description,
+    price: req.body.price,
+  });
+  Book.updateOne({ _id: id }, updatebook, (err) => {
+    if (err) {
+      console.log(err);
+      res.end(err);
+    } else {
+      //refresh the book list
+      res.redirect("/book-list");
+    }
+  });
+};
+
+module.exports.deletepage = (req, res, next) => {
+  let id = req.params.id;
+  Book.remove({ _id: id }, (err) => {
+    if (err) {
+      console.log(err);
+      res.end(err);
+    } else {
+      //refresh book list
+      res.redirect("/book-list");
+    }
+  });
+};
+
+

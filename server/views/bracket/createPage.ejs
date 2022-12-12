@@ -1,0 +1,141 @@
+<% include ../partials/header.ejs %>
+<% include ../partials/main_nav.ejs %>
+
+<!--localhost:3000/bracket-list/createPage-->
+<!--createPage.ejs-->
+<head> <link rel='stylesheet' href='/Content/edit.css' /> </head>
+<!--previously createPage.css changed to match edit page-->
+
+    
+<br> <br>
+<div id="allPage">
+<div class="container" style>
+    <div class="row">
+        <div class="col-md-offset-1 col-md-10">
+
+    
+       
+
+        <h1>
+            <!--<a target="_blank" href="#"> -->
+            <img src="../../Assets/images/team_logo2.png" height="100" width="110px" style="float:left; margin-left: 0.2in; margin-right: 0.2in; margin-top: 0.2in;"/>
+       
+    
+                <br> &nbsp; TOURNEY TEAM
+                
+            </a>
+          
+         </h1>  
+
+         <br>
+        <h3>Create Tournament</h3>
+        <form class="form" method="POST">
+            <div class="form-group">
+                <label for="tNameTextField">Tournament Name</label>
+                <input type="text" class="form-control"
+                id="tNameTextField"
+                placeholder="Tournament Name"
+                name="tournamentName" required>
+            </div>
+            <div class="form-group">
+                <label for="gameTextField">Type of Game</label>
+                <input type="text" class="form-control"
+                id="gameTextField"
+                placeholder="Game name"
+                name="gameType" required>
+            </div>
+            <div class="form-group" style="display: flex; text-align:left; width:100px">
+                <label for="dateField">Tournament Start Date</label>
+                <input type="date" id="startdate" name="startdate" required>
+            </div>
+            <div class="form-group" style="display: flex;">
+                <label for="dateField">Tournament End  Date</label>
+                <input type="date" id="enddate"  name="enddate" required>
+            </div>
+            <div class="form-group">
+                <label for="desTextField">Description</label>
+                <input type="texarea" class="form-control"
+                id="desTextField"
+                placeholder="Write a description for your tournament"
+                name="description" required>
+            </div>
+            <div class="form-group">
+            <label> Number of Teams:
+                <input type="radio" id="players8" name="players" value="8" />8
+                <input type="radio" id="players16" name="players" value="16" checked/>16 
+            </label>
+            </div>
+            <br>
+            <div class="container" style="display: flex;">
+                <div class="row"><!--First column of 8 Enter names-->
+                    <div class="col" id="col1">
+                    <% for (let count =0; count < 8 ; count++) { %>
+                        <label for="tNameTextField">Enter Team Name</label>
+                        <input type="text" class="form-control"
+                        id="nameTextField"
+                        placeholder="Enter Name"
+                        name="teams">
+                    <% } %>
+                    </div> 
+                    <!--Second column of 8 Entry names has variable visibility-->
+                    <div class="col" id="col2" style="visibility: visible;">
+                    <% for (let count =0; count < 8 ; count++) { %>
+                        <label for="tNameTextField">Enter Team Name</label>
+                        <input type="text" class="form-control"
+                        id="nameTextField"
+                        placeholder="Enter Name"
+                        name="teams" >
+                    <% } %>
+                    </div>
+                </div>
+            </div>
+            <br>            
+
+           <div class="createButton">
+            <button class="btn btn-primary" type="submit" >
+            <i class="fas fa-edit"></i>Submit</button>
+            &nbsp;&nbsp;
+            <!--submit button for the form above, 
+            return to /home page using the cancel button-->
+            <a href="/" class="btn btn-warning" style="background-color:red; color:white">
+            <i class="fas fa-undo" ></i>Cancel</a>
+        </div>
+        </form>
+        <br> 
+        </div>
+        <br>
+    </div>
+</div>
+</div>
+<script>
+$( document ).ready(function() {
+$( "#players8" ).click(function() {
+    if( $(this).is(':checked') ){
+        // if you want to change your Div's css property 
+        $("#col2").css("visibility","hidden");
+    }else if( $('#players16').is(':checked') ){
+        // Reverting back visibility to visible
+        $("#col2").css("visibility","visible");
+    }},);
+    
+    $( "#players16" ).click(function() {
+    if( $(this).is(':checked') ){
+        // if you want to change your Div's css property 
+        $("#col2").css("visibility","visible");
+    }else if( $('#players16').is(':checked') ){
+        // Reverting back visibility to visible
+        $("#col2").css("visibility","hidden");
+    }},);
+});
+
+document.getElementById("startdate").addEventListener("change", function() {
+    var input = this.value;
+    var dateEntered = new Date(input).toISOString().split('T')[0];    
+    document.getElementsByName("enddate")[0].setAttribute('min', dateEntered);
+});
+</script>
+
+
+<% include ../partials/bottom_nav.ejs %>
+<% include ../partials/footer.ejs %>
+

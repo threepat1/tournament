@@ -1,0 +1,96 @@
+<%- include ../partials/header.ejs %> <%- include ../partials/main_nav.ejs %>
+<head> <link rel='stylesheet' href='/Content/teamlist.css' /></head>
+<!--TeamList.ejs-->
+<!--localhost:3000/bracket-list-->
+<!--Shows all teams and had buttons to view, details, delete-->
+<!--Maybe rename details to play?-->
+<!--tournament#, Info, Status, Total teams#, Start Date, End Date, buttons-->
+<br><br><br>
+<div id="listPage">
+<!--<main class="container">-->
+ 
+  <form class="form" method="post">
+  <div class="row">
+    <!--<div class="col-md-offset-3 col-md-8"> -->
+      <h1>
+        <!--<a target="_blank" href="#"> -->
+        <img src="../../Assets/images/team_logo2.png" height="120" width="140px" style="float:left; margin-left: 0.2in; margin-right: 0.2in; margin-top: 0.01in;"/>
+        <br> &nbsp; <%=title %> List 
+      </h1>
+      &nbsp;&nbsp;&nbsp;
+      <a href="/bracket-list/createPage/" style="text-decoration:none; color:white">&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;
+        <input type="button" class="btn btn-dark btn-lg px-4 gap-3 text-white" value= "&emsp;Create Tournament"><i class ="fas fa-plus-circle left-margin" style ="position: relative;
+        right: 225px; top: 2px; color: gray;"></i></a></input>
+         &nbsp;  &nbsp; 
+      <% if(BracketList.length == 0){ %>
+        &nbsp;
+        <h1>No Tournament Created</h1>
+        <br>
+      <% } else{ %>  
+    <br><br>
+    <div class="row">
+    <div class ="column9">
+      <table class="table table-bordered table-striped" style="background-image: linear-gradient(to right, #3213c7, #2d78e9, #e4acd0, #e20060, #eb1242); color:white; width:100%;">
+        <thred class=" table bg-danger">
+        <tr>
+          <th class="text-center" style=" width:10 ">#</th>
+          <th class="text-center" style=" width:80 ">Tournament Info</th>
+          <th class="text-center" style=" width:40 ">Status</th>
+          <th class="text-center" style=" width:5 ">Total<br>teams</th>
+             <th class="text-center" style=" width:80 ">Start date </th>
+          <th class="text-center" style=" width:80 ">End date </th>
+     
+     
+          </tr>
+        </thred>
+        <% for (let count=0; count< BracketList.length; count++){%>
+          <tr>
+            <td class="text-centre "><%=count+1 %></td>
+            <td class="text-centre "><%=BracketList[count].tournamentName %></td>
+            <td class="text-centre "><%=BracketList[count].status%></td>            
+            <td class="text-centre "><%=BracketList[count].players%></td>
+            <td class="text-centre "><%=BracketList[count].startdate.toISOString().replace('T', ' ').substr(0, 10)%></td>
+            <td class="text-centre "><%=BracketList[count].enddate.toISOString().replace('T', ' ').substr(0, 10)%></td>
+ 
+            <td class="text-centre ">
+              <a href="/bracket-list/showall/<%= BracketList[count]._id %>"
+                style="text-decoration:none; color:white">
+                <input type="button" class="btn btn-primary btn-sm" value="View">
+              </input></a></td>
+          
+            <% if(User !=null){ %>
+              <% if(BracketList[count].userid==User._id){ %>
+                <td class="text-centre "><a href="/bracket-list/show/<%= BracketList[count]._id %>"
+                      style="text-decoration:none; color:white"><input type="button" class="btn btn-primary btn-sm" value="Details"></input></a></td>
+                <td class="text-centre ">
+                  <a href="/bracket-list/delete/<%= BracketList[count]._id %>"
+                      style="text-decoration:none; color:white">
+                      <input type="button" class="btn btn-warning btn-sm" value="Delete" style="color:white"></input></a>
+                </td>
+                <% } else{ %>
+                  <td class="text-centre "><a href="/bracket-list/show/<%= BracketList[count]._id %>"
+                      style="text-decoration:none; color:white"><input type="button" class="btn btn-primary btn-sm" value="Details" disabled></input></a></td>
+                  <td class="text-centre ">
+                   <a href="/bracket-list/delete/<%= BracketList[count]._id %>"
+                      style="text-decoration:none; color:white">
+                      <input type="button" class="btn btn-warning btn-sm" value="Delete" disabled style="color:white"></input></a>
+                  </td>
+                  <%}%>
+                    <%}%>
+          </tr>
+          <%}%>
+      </table>
+      </div>
+    </div>
+      <% } %>
+    </div>
+  </div>
+  </form>
+
+</main>
+</div>
+<script>
+  const date = moment();
+
+</script>
+<%- include ../partials/bottom_nav.ejs %><%- include ../partials/footer.ejs %>

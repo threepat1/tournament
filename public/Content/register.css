@@ -1,0 +1,74 @@
+body {
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	left: 0px;
+	background-size: 100%;
+	background-repeat: repeat;
+	position: absolute;
+	overflow: hidden;
+	min-height: 100vh;
+	background-position: fixed;
+	overflow: scroll;
+	color: cornsilk;
+  }
+  h1 {
+	background-repeat: no-repeat;
+	/*background-image: url("/Assets/images/graybg.jpg");*/
+	background-image: linear-gradient(to right, #fdfdff, #ebeff7);
+	background-position: left;
+	background-size: 5 px;
+	font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+	font-size: 2em;
+	font-weight: 900;
+	color: rgb(19, 18, 18);
+	padding-left: 40px;
+	height: 120px;
+	width: 650px;
+	padding-top: 1px;
+
+	border-radius: 15px;
+	box-shadow: 5px 5px 5px #808080;
+	text-align: left;
+
+  }
+
+#loginPage {
+    width: 900px;
+
+    margin-right: auto;
+    margin-left: auto;
+    border: 3px solid #191a19;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px #484bec;
+	background-image: url('teamlogo3.png');
+	background-color: rgba(190, 184, 209, 0.9);
+	color: rgb(255, 248, 248);
+	font-weight: 800;
+	font-size: 14pt;	
+    text-align: left;
+	 /*background-color: rgb(233, 240, 243, 96); */
+	 margin: auto;
+	 padding-left: 120px;
+	 padding-right: 120px;
+	 background-image: linear-gradient(to right, #3213c7, #2d78e9, #e4acd0, #e20060, #eb1242);
+}
+
+
+label {
+
+    float:center;
+    text-align: left;
+	padding-right: 15px;
+	font-size: 16pt;
+}
+
+
+
+footer {
+    text-align: center;
+	height: 50px;
+    background-color: rgb(83, 87, 90);
+    color: rgb(255, 255, 255);
+    font-size: large;
+}

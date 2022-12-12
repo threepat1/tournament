@@ -1,0 +1,6 @@
+{
+  "git.ignoreLimitWarning": true,
+  "appService.zipIgnorePattern": ["node_modules{,/**}", ".vscode{,/**}"],
+  "appService.defaultWebAppToDeploy": "/subscriptions/567b3515-e9b4-46cf-8ef5-8212c9c91ff5/AppServices/subscriptions/567b3515-e9b4-46cf-8ef5-8212c9c91ff5/resourceGroups/TourneyTeam_group/providers/Microsoft.Web/sites/TourneyTeam",
+  "appService.deploySubpath": "."
+}

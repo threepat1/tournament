@@ -1,0 +1,171 @@
+<% include ../partials/header.ejs %>
+<% include ../partials/main_nav.ejs %>
+<head> <link rel='stylesheet' href='/Content/edit.css' /> </head>
+<!--localhost:3000/bracket-list/edit/_id:-->
+<!--Edit.ejs-->
+
+<div id="allPage">
+<div class="container">
+    <div class="row">
+        <div class="col-md-offset-1 col-md-10">
+            <br>
+          
+                <h1>
+                    <a target="_blank" href="#"> 
+                    <img src="../../Assets/images/team_logo2.png" height="120" width="140px" style="float:left; margin-left: 0.2in; margin-right: 0.2in; margin-top: 0.2in;"/>
+                        <br> &nbsp; TOURNEY TEAM
+                    </a>
+                  
+                 </h1>  
+            <h3>Create Tournament</h3>
+            <form class="form" method="POST">
+                <div class="form-group">
+                    <label for="tNameTextField">Tournament Name</label>
+                    <input type="text" class="form-control"
+                    id="tNameTextField"
+                    placeholder="Tournament Name"
+                    name="tournamentName" 
+                    value="<%=bracket.tournamentName %>"
+                    required>
+                </div>
+                <div class="form-group">
+                    <label for="gameTextField">Type of Game</label>
+                    <input type="text" class="form-control"
+                    id="gameTextField"
+                    placeholder="Game name"
+                    name="gameType" 
+                    value="<%=bracket.gameType %>"
+                    required>
+                </div>
+                <div class="form-group">
+                    <label for="desTextField">Description</label>
+                    <input type="texarea" class="form-control"
+                    id="desTextField"
+                    placeholder="Write a description for your tournament"
+                    name="description" 
+                    value="<%=bracket.description %>"
+                    required>
+                </div>
+                <div class="form-group" style="display: flex;">
+                    <label for="dateField">Start</label>
+                    <input type="date" id="startdate" 
+                    name="startdate" value="<%=startdate%>"
+                    required>
+                </div>
+                <div class="form-group" style="display: flex;">
+                    <label for="dateField">End</label>
+                    <input type="date" id="enddate"  
+                    name="enddate" value="<%=enddate%>"required>
+                </div>
+                <div class="form-group">
+                    <label> Number of Teams:</label>
+                <!--Checks for number of players, visibility cannot be removed here-->
+                    <%console.log(bracket.players) %>
+                    <% if (bracket.players == 8) { %>
+                        <input type="radio" id="players8" name="players" value="8" checked/>8
+                        <input type="radio" id="players16" name="players" value="16" />16 
+                        <%console.log("8") %>
+                    <%} else { %>
+                        <input type="radio" id="players8" name="players" value="8" />8
+                        <input type="radio" id="players16" name="players" value="16" checked/>16 
+                        <%console.log(16) %>
+                    <%} %>
+                </div>
+                    <div class="container" style="display: flex;">
+                        <div class="row">
+                            <div class="col" id="col1">
+                            <% for (let count =0; count < 8 ; count++) { %>
+                                <label for="tNameTextField">Enter Name</label>
+                                <input type="text" class="form-control"
+                                id="nameTextField"
+                                placeholder="Enter Name"
+                                name="teams" 
+                                value="<%=bracket.teams[count]%>"
+                                required>
+                            <% } %>
+                        </div> 
+                        <div class="col" id="col2">
+                            <% for (let count =0; count < 8 ; count++) { %>
+                            <label for="tNameTextField">Enter Name</label>
+                            <input type="text" class="form-control"
+                            id="nameTextField"
+                            placeholder="Enter Name"
+                            name="teams" 
+                            value="<%=bracket.teams[count+8]%>"
+                            >
+                            <!--Changing from 16 to 8 members is only possible because  
+                            fields 9-16 are not required-->
+                            <% } %>
+                            <% if (bracket.players == 8) { %>
+                                <!--function to change default visibility, must be after the second column?-->
+                                <script>document.getElementById('col2').style.visibility = 'hidden'</script>
+                            <%} else { %>
+                                <script>document.getElementById('col2').style.visibility = 'visible'</script>
+                            <%} %>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary" type="submit" >
+                Submit</button>
+                <a href="/bracket-list" class="btn btn-warning">
+                <i class="fas fa-undo"></i> Cancel</a>
+                <div visibility: hidden>
+                    <% for (let c = 0; c < bracket.scoreG1.length; c++) { %>
+                        <input type="text" class="form-control" name="t1" value="<%=bracket.scoreG1[c]%>">
+                      <%}%>
+                    <% for (let c = 0; c < bracket.scoreG2.length; c++) { %>
+                        <input type="text" class="form-control" name="t2" value="<%=bracket.scoreG2[c]%>">
+                      <%}%>
+                      <% for (let c = 0; c < bracket.scoreG3.length; c++) { %>
+                        <input type="text" class="form-control" name="t3" value="<%=bracket.scoreG3[c]%>">
+                      <%}%>
+                      <% for (let c = 0; c < bracket.scoreG4.length; c++) { %>
+                        <input type="text" class="form-control" name="t4" value="<%=bracket.scoreG4[c]%>">
+                      <%}%>
+                    <% for (let c = 0; c < 16; c++) { %>
+                        <input type="text" name="teams" value="<%= bracket.teams[c]%>">
+                    <%}%>
+                    <% for (let c = 0; c < bracket.winner.length; c++) { %>
+                        <input type="text" name="w" value="<%= bracket.winner[c]%>">                    
+                    <%}%>
+                </div>
+            </form>
+            </div>
+            <br>
+        </div>
+    </div>
+</div>
+</div> 
+<script>
+    $( document ).ready(function() {
+        $( "#players8" ).click(function() {
+            if( $(this).is(':checked') ){
+                // if you want to change your Div's css property 
+                $("#col2").css("visibility","hidden");
+            }else if( $('#players16').is(':checked') ){
+                // Reverting back visibility to visible
+                $("#col2").css("visibility","visible");
+        }},);
+            $( "#players16" ).click(function() {
+            if( $(this).is(':checked') ){
+                // if you want to change your Div's css property 
+                $("#col2").css("visibility","visible");
+            }else if( $('#players16').is(':checked') ){
+                // Reverting back visibility to visible
+                $("#col2").css("visibility","hidden");
+        }},);
+  
+}); 
+
+document.getElementById("startdate").addEventListener("change", function() {
+    var input = this.value;
+    var dateEntered = new Date(input).toISOString().split('T')[0];    
+    document.getElementsByName("enddate")[0].setAttribute('min', dateEntered);
+});
+</script>
+</script>
+
+
+<% include ../partials/bottom_nav.ejs %>
+<% include ../partials/footer.ejs %>
+

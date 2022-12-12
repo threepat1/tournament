@@ -1,0 +1,193 @@
+/*body {
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  background-size: 100%;
+  background-repeat: repeat;
+  position: absolute;
+  overflow: hidden;
+  min-height: 100vh;
+  background-position: fixed;
+  overflow: scroll;
+}
+*/
+
+body {
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  background-size: 100%;
+  background-repeat: repeat;
+  position: absolute;
+  overflow: hidden;
+  min-height: 100vh;
+  background-position: fixed;
+  overflow: scroll;
+}
+h1 {
+  background-image: linear-gradient(to right, #fdfdff, #ebeff7);
+  background-position: left;
+  background-size: 5 px;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  font-size: 2em;
+  font-weight: 900;
+  color: black;
+  padding-left: 200px;
+  height: 120px;
+  width: 1020px;
+  padding-top: 0.01px;
+  border-radius: 15px;
+  box-shadow: 5px 5px 5px #808080;
+  text-align: left;
+  margin-left: 45px;
+  
+
+  
+}
+table {
+
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12;
+  font-weight: 600;
+  width: 100%;
+  margin:50px;
+}
+
+#tableteamlist {
+  margin: auto;
+  
+}
+/*
+h1 {
+  background-repeat: no-repeat;
+  background-image: url("/Assets/images/graybg.jpg");
+  background-position: left;
+  background-size: 5 px;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  font-size: 2.5em;
+  font-weight: 900;
+  color: black;
+  padding-left: 80px;
+  height: 150px;
+  width: 570px;
+  padding-top: 5px;
+  border-radius: 15px;
+  box-shadow: 5px 5px 5px #808080;
+  text-align: left;
+}
+/*
+
+
+#allPage {
+  width: 980px;
+
+  margin-right: auto;
+  margin-left: auto;
+  border: 3px solid #191a19;
+  border-radius: 20px;
+  box-shadow: 5px 5px 5px #484bec;
+background-image: url('teamlogo3.png');
+background-color: rgba(0,0,0,0.90);
+color: white;
+font-weight: 800;
+font-size: 14pt;	
+padding-left: 190px;
+
+ background-color: rgb(233, 240, 243); 
+ */
+#listPage {
+  width: 1100px;
+
+  margin-right: auto;
+  margin-left: auto;
+  border: 3px solid #191a19;
+  border-radius: 20px;
+  box-shadow: 5px 5px 5px #6769e6;
+  padding: 6px;
+  padding-left: 10px;
+
+  margin: auto;
+
+  /*background-color: rgb(233, 240, 243, 95);
+  background-color: rgba(255, 255, 255, 0.5);*/
+  color: rgb(245, 238, 238);
+  background-image: linear-gradient(
+    to right,
+    #3213c7,
+    #2d78e9,
+    #e4acd0,
+    #e20060,
+    #eb1242
+  );
+}
+
+#tnumber {
+  width: 50px;
+}
+
+#ttourinfo {
+  width: 150px;
+}
+
+blockquote {
+  font-size: 16pt;
+}
+
+hr {
+  border-style: dashed;
+  border-width: 1px;
+  border-color: rgb(30, 31, 29);
+}
+
+
+a {
+  text-decoration: none;
+  color: #1c5be4;
+}
+
+form {
+  font-size: 14pt;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+label {
+  width: 290px;
+  float: left;
+  text-align: right;
+  padding-right: 15px;
+  font-size: 16pt;
+}
+#button {
+  text-align: center;
+  margin: auto;
+  color: #171817;
+  background-color: #bad2f3;
+  width: 130px;
+  height: 50px;
+  box-shadow: 5px 5px 5px #161616;
+  font-size: medium;
+  font-weight: 900;
+  margin: auto;
+  position: relative;
+  left: 380px;
+  border-radius: 20px;
+  border: 2px solid #3d63e2;
+}
+
+#create {
+  width: 800px;
+  border-radius: 15px;
+  padding-left: 150px;
+}
+
+footer {
+  text-align: center;
+  height: 50px;
+  background-color: rgba(83, 87, 90, 0);
+  color: rgb(255, 255, 255);
+  font-size: large;
+}
